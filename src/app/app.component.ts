@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { WorkoutService } from './workout.service';
 import { FormsModule } from '@angular/forms';
 interface Workout {
   name: string;
@@ -20,6 +21,7 @@ interface Workout {
   ]
 })
 export class AppComponent implements OnInit {
+  title = 'FiTrack';
   userName: string = '';
   workoutType: string = 'Running';
   workoutMinutes: number = 0;
@@ -43,9 +45,13 @@ export class AppComponent implements OnInit {
   pageIndex = 1;
   total = 0;
 
+  constructor(private workoutService: WorkoutService) {}
+
   ngOnInit() {
-    this.updateDisplayedWorkouts();
+    this.workouts = this.workoutService.getWorkouts();
+    this.filterWorkouts();
   }
+
 
   addWorkout() {
     const newWorkout: Workout = {
