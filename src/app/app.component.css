@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#bgpicture{
+    background-image: url('./grass\ photo.jpeg');
+    background-size: cover;
+}

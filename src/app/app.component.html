@@ -1,0 +1,77 @@
+<div class="flex mb-5 h-screen">
+  <aside class=" w-64 p-6">
+    <div class="mb-8">
+      <!-- title of the page/logo  -->
+      <h2 class="bg-gradient-to-r from-lime-600 via-lime-500 to-emerald-700 text-transparent bg-clip-text text-6xl font-semibold">FiTrack</h2>
+    </div>
+    <!-- Navigation for  Dashboard and Workouts-->
+    <nav>
+      <ul>
+        <li class="bg-gradient-to-r from-lime-600 to-emerald-500 bg-clip-text text-transparent font-medium mb-6 text-3xl ">
+          <a routerLink="/dashboard" class="flex items-center space-x-2">
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="mb-6 text-3xl">
+          <a routerLink="/workout" class="flex items-center space-x-2 bg-gradient-to-r from-emerald-400 to-green-700 text-transparent bg-clip-text">
+            <span>Workout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="flex-1 m-6 p-8" id="bgpicture" >
+    <!-- The Add workout section  -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <div class="mb-4">
+        <label for="name" class="block text-lg font-medium text-green-700">Name💪</label>
+        <input type="text" id="name" [(ngModel)]="userName" placeholder="Enter Name"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="workout" class="block text-lg font-medium text-green-700">Choose a Workout🏋️</label>
+        <select id="workout" [(ngModel)]="workoutType" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+          <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="minutes" class="block text-lg font-medium text-green-700">Minutes⏳</label>
+        <input type="number" id="minutes" [(ngModel)]="workoutMinutes" placeholder="Enter Minutes"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+      </div>
+
+      <button (click)="addWorkout()" class="bg-green-500 text-white px-4 py-2 rounded-md">Add Workout</button>
+    </div>
+
+    <!-- the workout sorting and viewing section  -->
+    <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+      <div class="flex mb-4">
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterWorkouts()" placeholder="Search by name"
+          class="mr-4 p-2 border border-green-700 text-green-700 rounded-md">
+        <select [(ngModel)]="selectedType" (change)="filterWorkouts()" class="p-2 border text-green-700 border-green-700 rounded-md">
+          <option value="">All Types</option>
+          <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+
+      <h3 class="text-2xl font-semibold mb-4">Workouts</h3>
+      <ul>
+        <li *ngFor="let workout of paginatedWorkouts" class="mb-2">
+          <div class="flex justify-between items-center">
+            <span>{{ workout.name }} - {{ workout.type }} for {{ workout.minutes }} minutes</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="flex justify-between mt-4">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="bg-green-400 text-white font-medium px-4 py-2 rounded-md">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()" class="bg-green-400 text-white px-4 py-2 rounded-md">Next</button>
+      </div>
+    </div>
+    
+  </main>
+</div>
