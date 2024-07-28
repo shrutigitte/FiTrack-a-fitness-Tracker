@@ -21,24 +21,17 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  // Test for checking if COmponent is being created or not 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  // it(`should have the 'fitness-tracker' title`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.componentInstance;
-  //   expect(app.title).toEqual('fitness-tracker');
-  // });
-
+  
+// test if the html element renders the correct title 
   it('should render title', () => {
-    // const fixture = TestBed.createComponent(AppComponent);
-    // fixture.detectChanges();
-    // const compiled = fixture.nativeElement as HTMLElement;
-    // console.log('Rendered title:', compiled.querySelector('h2').textContent);
-    // expect(titleElement?.textContent).toContain('FiTrack');
+    
     const titleElement: HTMLElement | null = fixture.nativeElement.querySelector('h2');
     expect(titleElement?.textContent).toContain('FiTrack');
   });
